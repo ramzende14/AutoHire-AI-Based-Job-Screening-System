@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - AI Job Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        /* CSS variables for a consistent theme */
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #d8b4fe;
+            --tertiary-color: #4b0082;
+            --background-light: #f5f3ff;
+            --background-dark: #eee9ff;
+            --text-color: #333;
+            --card-background: #ffffff;
+            --success-color: #28a745;
+            --error-color: #dc3545;
+            --border-radius: 12px;
+            --box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Utility Classes */
+        .text-center { text-align: center; }
+        .flex-grow { flex-grow: 1; }
+        .d-flex { display: flex; }
+        .flex-wrap { flex-wrap: wrap; }
+        .gap-1 { gap: 1rem; }
+        .mb-1 { margin-bottom: 1rem; }
+        .mb-2 { margin-bottom: 2rem; }
+        .mt-2 { margin-top: 2rem; }
+        .p-2 { padding: 2rem; }
+        .card-shadow { box-shadow: var(--box-shadow); }
+
+        /* General UI Elements */
+        h1, h2, h3 {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        button {
+            border: none;
+            cursor: pointer;
+            transition: background-color var(--transition-speed), transform var(--transition-speed);
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: var(--background-dark);
+            color: var(--tertiary-color);
+            transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+        }
+
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(106, 13, 173, 0.2);
+        }
+
+        label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .message {
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .message.success {
+            background-color: #d4edda;
+            color: var(--success-color);
+        }
+
+        .message.error {
+            background-color: #f8d7da;
+            color: var(--error-color);
+        }
+
+        /* Header & Navigation */
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 3rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-bottom: 4px solid var(--secondary-color);
+        }
+
+        header .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            white-space: nowrap;
+        }
+
+        header .logo i {
+            color: var(--secondary-color);
+        }
+
+        .nav-buttons {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons button {
+            background-color: var(--secondary-color);
+            color: var(--tertiary-color);
+            font-weight: 600;
+        }
+
+        .nav-buttons button:hover {
+            background-color: #c084fc;
+        }
+
+        /* Main Content & Card */
+        main {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            background-image: url('https://www.transparenttextures.com/patterns/cubes.png');
+            background-color: var(--background-light);
+        }
+
+        .card {
+            background: var(--card-background);
+            border-radius: var(--border-radius);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 500px;
+            border: 1px solid #e0e0e0;
+        }
+
+        .card h2 {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+            color: var(--primary-color);
+        }
+
+        .card h2::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 10px auto 0;
+            border-radius: 2px;
+        }
+
+        .submit-btn {
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: 600;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        .submit-btn:hover {
+            background-color: var(--tertiary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+            .nav-buttons { justify-content: flex-start; width: 100%; }
+            main { padding: 1rem; }
+            .card { padding: 1.5rem; }
+            .card h2 { font-size: 1.7rem; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-buttons button { padding: 0.5rem 1rem; }
+            .card h2 { font-size: 1.5rem; }
+        }
+
+        /* 🟣 Loader CSS for login page */
+        .loader-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(75, 0, 130, 0.8);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            visibility: hidden;
+            opacity: 0;
+            transition: visibility 0s, opacity 0.5s linear;
+        }
+
+        .loader-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 5px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: #d8b4fe;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        .loader-text {
+            color: #d8b4fe;
+            margin-top: 20px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            animation: pulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="logo"><i class="fas fa-microchip"></i> AI Job Portal</div>
+    <div class="nav-buttons">
+        <a href="login.html" style="text-decoration: none;">
+            <button><i class="fas fa-sign-in-alt"></i> Login</button>
+        </a>
+        <a href="register.html" style="text-decoration: none;">
+            <button><i class="fas fa-user-plus"></i> Register</button>
+        </a>
+    </div>
+</header>
+
+<main>
+    <div class="card card-shadow">
+        <h2>Access Your Account</h2>
+        <div id="statusMessage" class="message" style="display: none;"></div>
+
+        <form id="loginForm" onsubmit="event.preventDefault(); login();">
+            <div class="input-group">
+                <label for="loginEmail"><i class="fas fa-envelope"></i> Email Address <span style="color:red;">*</span></label>
+                <input type="email" id="loginEmail" placeholder="youremail@example.com" required>
+            </div>
+
+            <div class="input-group">
+                <label for="loginPassword"><i class="fas fa-lock"></i> Password <span style="color:red;">*</span></label>
+                <input type="password" id="loginPassword" placeholder="Enter your password" required>
+            </div>
+
+            <button type="submit" class="submit-btn"><i class="fas fa-paper-plane"></i> Login</button>
+        </form>
+
+        <div class="text-center mt-2">
+            <p style="font-weight: 500;">
+                Don’t have an account?
+                <a href="register.html" style="color: var(--primary-color); text-decoration: none; font-weight: 600; transition: color var(--transition-speed);" onmouseover="this.style.color='#c084fc'" onmouseout="this.style.color='var(--primary-color)'">Register now</a>
+            </p>
+        </div>
+    </div>
+</main>
+
+<footer>
+    © 2025 AI Job Portal. All rights reserved.
+</footer>
+
+<div id="loader" class="loader-overlay">
+    <div class="loader-spinner"></div>
+    <div class="loader-text">Logging in...</div>
+</div>
+
+<script src="/js/script.js"></script>
+
+</body>
+</html>

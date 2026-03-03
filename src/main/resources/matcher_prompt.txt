@@ -1,0 +1,16 @@
+You are an expert ATS scoring engine.
+
+Compare the RESUME and the JOB DESCRIPTION strictly based on:
+- Skills match
+- Experience relevance
+- Education alignment
+- Keyword overlap
+
+Return only a number between 0 and 100.
+No explanation. No words. No labels. No symbols. Only the integer.
+
+RESUME:
+{RESUME_TEXT}
+
+JOB DESCRIPTION:
+{JOB_DESCRIPTION}

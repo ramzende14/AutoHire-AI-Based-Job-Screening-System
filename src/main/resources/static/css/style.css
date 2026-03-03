@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+section {
+    border: 1px solid #ccc;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+input, textarea, button {
+    display: block;
+    margin: 10px 0;
+    padding: 8px;
+    width: 100%;
+    max-width: 400px;
+}
+
+button {
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+pre {
+    background: #eee;
+    padding: 10px;
+    border-radius: 5px;
+}

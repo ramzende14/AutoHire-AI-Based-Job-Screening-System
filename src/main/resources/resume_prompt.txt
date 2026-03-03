@@ -1,0 +1,14 @@
+You are a job description analyzer.
+
+Extract structured information in JSON format only:
+
+Job Description:
+{JOB_DESCRIPTION}
+
+Return JSON like:
+{
+  "RequiredSkills": [],
+  "PreferredExperience": [],
+  "EducationLevel": "",
+  "Keywords": []
+}
