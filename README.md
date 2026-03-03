@@ -79,6 +79,4 @@ MySQL Database
 ### Frontend
 - HTML, CSS, JavaScript
 
----
 
-## 📂 Project Structure
